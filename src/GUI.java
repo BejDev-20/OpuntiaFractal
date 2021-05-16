@@ -14,8 +14,7 @@ import java.awt.event.ActionEvent;
 
 
 /**
- * GUI with components to set the settings for the fractal drawing
- * with the parameters:
+ * GUI with components to set the settings for the fractal drawing with the parameters:
  * -recursion depth of the fractals (2 to 10)
  * -ratio of child's radius to parent's radius (40 to 70)
  * -degree of the position of the child to the parent (25 to 60)
@@ -60,8 +59,7 @@ public class GUI{
     
     /**
      * Creates the GUI with the settings (controls)
-     * @param fractals fractal object that has all the default and updated
-     * data for the fractals to be drawn
+     * @param fractals fractal object that has all the default and updated data for the fractals to be drawn
      */
     public GUI(GenerateFractal fractals){
         this.allFractals = fractals;
@@ -138,39 +136,26 @@ public class GUI{
         
         //adding action listeners
         chooseCactusColor.setBackground(allFractals.getCactusColor());
-        chooseCactusColor.addActionListener(
-            new ActionListener(){
-                public void actionPerformed(ActionEvent e){
-                    Color color = JColorChooser.showDialog(panel, "Color chooser", 
-                                                           allFractals.getCactusColor());
+        chooseCactusColor.addActionListener( e -> {
+                    Color color = JColorChooser.showDialog(panel, "Color chooser",  allFractals.getCactusColor());
                     if (color != null){
-                        chooseCactusColor.setBackground(color);                                       
+                        chooseCactusColor.setBackground(color);
                     }
                 }
-            }
         );
         
         choosePearColor.setBackground(allFractals.getPearColor());
-        choosePearColor.addActionListener(
-            new ActionListener(){
-                public void actionPerformed(ActionEvent e){
-                    Color color = JColorChooser.showDialog(panel, "Color chooser", 
-                                                           allFractals.getPearColor());
+        choosePearColor.addActionListener( e -> {
+                    Color color = JColorChooser.showDialog(panel, "Color chooser", allFractals.getPearColor());
                     if (color != null){
-                        choosePearColor.setBackground(color);                                       
+                        choosePearColor.setBackground(color);
                     }
                 }
-            }
         );
         
-        drawButton.addActionListener(
-            new ActionListener(){
-                public void actionPerformed(ActionEvent e){
-                    fractals.setData((Integer)(recursionDepthComboBox.getSelectedItem()), 
-                                    childRadiusSlider.getValue(), childPositionSlider.getValue(),
-                                    chooseCactusColor.getBackground() , choosePearColor.getBackground());
-                }
-            }
+        drawButton.addActionListener( e -> fractals.setData((Integer)(recursionDepthComboBox.getSelectedItem()),
+                                childRadiusSlider.getValue(), childPositionSlider.getValue(),
+                                chooseCactusColor.getBackground() , choosePearColor.getBackground())
         );
     }
 }

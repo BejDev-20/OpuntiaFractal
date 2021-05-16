@@ -3,8 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- * Represents a shape (fractal) to draw with given radius, color and
- * center point of the shape
+ * Represents a shape (fractal) to draw with given radius, color and center point of the shape
  *
  * @author Iulia Bejsovec
  * @version 02/2020

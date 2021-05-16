@@ -7,12 +7,11 @@ import java.awt.Point;
 import java.awt.Toolkit;
 
 /**
- * The view part of the MVC. Representsthe window to draw the fractals on. Implements the
- * Observer interface with a pull model, retrieves data from the subjects when ready to
- * draw
+ * The view part of the MVC. Representsthe window to draw the fractals on. Implements the Observer interface with a
+ * pull model, retrieves data from the subjects when ready to draw
  *
  * @author Iulia Bejsovec
- * @version 02-01-2020
+ * @version 02/2020
  */
 public class Display extends JFrame implements Observer{
     /** all fractals to be drawn (subject) */
@@ -45,8 +44,7 @@ public class Display extends JFrame implements Observer{
      * Gets up to date data for the fractals and set the frame visible
      */
     public void update(){
-        allFractals.getData((int)getContentPane().getSize().getWidth(), 
-                            (int)getContentPane().getSize().getHeight());
+        allFractals.getData((int)getContentPane().getSize().getWidth(), (int)getContentPane().getSize().getHeight());
         this.setVisible(true);
     }
     

@@ -4,8 +4,7 @@ import javax.swing.JPanel;
 import java.awt.Point;
 
 /**
- * Class holds the settings information about the fractals, generates
- * them and draws when asked to by its observers.
+ * Class holds the settings information about the fractals, generates them and draws when asked to by its observers.
  * Model part of the MVC
  *
  * @author Iulia Bejsovec
@@ -53,8 +52,7 @@ public class GenerateFractal implements Subject{
     }
     
     /**
-     * Generates fractals with the start in the bottom middle
-     * of the given parameters
+     * Generates fractals with the start in the bottom middle of the given parameters
      * @param width     width of the panel
      * @param height    height of the panel
      * @return current object
@@ -67,7 +65,7 @@ public class GenerateFractal implements Subject{
         Point startingPoint = new Point((width/2), height - STARTING_RADIUS );
         generateFractals(recursionDepth, STARTING_RADIUS, startingPoint, degree);
         return this;
-    };
+    }
     
     /**
      * Recursively generates the fractals with the given parameters
@@ -77,7 +75,6 @@ public class GenerateFractal implements Subject{
      * @throws IllegalArgumentException when level passed is less than 1
      * @throws IllegalArgumentException if radius passed is negative or equals 0
      */
-    
     private void generateFractals(int recursionDepth, double radius, Point centerPoint, 
                                   double currentDegree){
         if (recursionDepth < 1){
@@ -117,7 +114,6 @@ public class GenerateFractal implements Subject{
                                                                                                     
     /**
      * Sets the fractal data to the passed values
-     * 
      * @param recursionDepth    depth of recursion of fractals
      * @param radiusRatio       radius ratio of the child to the parent
      * @param cactusColor       color of the cactus
@@ -147,7 +143,7 @@ public class GenerateFractal implements Subject{
         this.cactusColor = cactusColor;
         this.pearColor = pearColor;
         notifyAllObservers();
-    };
+    }
     
     /**
      * Draws every fractal on the given graphics object
@@ -198,7 +194,7 @@ public class GenerateFractal implements Subject{
      */
     public void attach(Observer observer){
         observers.add(observer);  
-    };
+    }
     
     /**
      * Deletes an observer from the observer list
@@ -206,14 +202,14 @@ public class GenerateFractal implements Subject{
      */
     public void detach(Observer observer){
         observers.remove(observers.indexOf(observer));
-    };
+    }
     
     /**
-     * Notifies all observers that there is a data update
+     * Notifies all observers of a data update
      */
     public void notifyAllObservers(){
         for (Observer oneObserver : observers){
             oneObserver.update();
         }
-    };
+    }
 }

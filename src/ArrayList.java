@@ -25,7 +25,6 @@ public class ArrayList<E> implements Iterable<E>{
 
     /**
      * Creates an empty list of a given capacity(must be bigger or equal 0)
-     * 
      * @param capacity size of the list
      * @throws IllegalArgumentException if capacity is smaller than 0
      */
@@ -40,7 +39,6 @@ public class ArrayList<E> implements Iterable<E>{
 
     /**
      * Returns the current number of elements in the list
-     * 
      * @return the current number of elements in the list
      */
     public int size() {
@@ -48,8 +46,7 @@ public class ArrayList<E> implements Iterable<E>{
     }
 
     /**
-     * Get the element at the given index
-     * 
+     * Gets the element at the given index
      * @param index the index of the element to return
      * @return the element at the given index
      */
@@ -60,7 +57,6 @@ public class ArrayList<E> implements Iterable<E>{
 
     /**
      * Checks the list and gets the index of the given value
-     * 
      * @param value the value we are checking the list for
      * @return -1 if the list doesn't contain the value or the index
      * at which the value is
@@ -76,7 +72,6 @@ public class ArrayList<E> implements Iterable<E>{
 
     /**
      * Checks if the list is empty
-     * 
      * @return true if the list is empty, false if not
      */
     public boolean isEmpty() {
@@ -85,7 +80,6 @@ public class ArrayList<E> implements Iterable<E>{
     
     /**
      * Checks if the list contains a value
-     * 
      * @param value item that we are checking the list for 
      * @return true if the list contains the value, false otherwise
      */
@@ -95,7 +89,6 @@ public class ArrayList<E> implements Iterable<E>{
     
     /**
      * Adds a value to the list, updates the size of the list
-     * 
      * @param value new element to be added to the list
      */
     public void add(E value) {
@@ -105,11 +98,8 @@ public class ArrayList<E> implements Iterable<E>{
     }
     
     /**
-     * Adds a value to the list at the given index shifting subsequent
-     * values right and update the size
-     * 
-     * @param index the index where to add the value at, must be bigger or 
-     * equal 0 and  smaller than size
+     * Adds a value to the list at the given index shifting subsequent values right and update the size
+     * @param index the index where to add the value at, must be bigger or equal 0 and  smaller than size
      * @param value the value to add to the list
      */
     public void add(int index, E value) {
@@ -123,11 +113,8 @@ public class ArrayList<E> implements Iterable<E>{
     }
     
     /**
-     * Removes an item from the list at the given index shifting elements 
-     * left and updates the size
-     * 
-     * @param index the index at which to remove the value, must be be bigger or 
-     * equal 0 and  smaller than size
+     * Removes an item from the list at the given index shifting elements left and updates the size
+     * @param index the index at which to remove the value, must be be bigger or equal 0 and  smaller than size
      */
     public void remove(int index) {
         checkIndex(index);
@@ -140,9 +127,7 @@ public class ArrayList<E> implements Iterable<E>{
     
     /**
      * Replaces a value in the list with the given value at the given index
-     * @param index the index of the element to be set to new value, must be
-     * be bigger or equal 0 and  smaller than size
-     * 
+     * @param index the index of the element to be set to new value, must be bigger or equal 0 and  smaller than size
      * @param value the value to update the element to
      */
     public void set(int index, E value) {
@@ -162,7 +147,6 @@ public class ArrayList<E> implements Iterable<E>{
 
     /**
      * Adds all elements of the given list to this list and updates the size
-     * 
      * @param other the new list to be appended to this list
      */
     public void addAll(ArrayList<E> other) {
@@ -174,7 +158,6 @@ public class ArrayList<E> implements Iterable<E>{
 
     /**
      * Creates an iterator of this list
-     * 
      * @return a new ArrayListIterator
      */
     public ArrayListIterator iterator() {
@@ -183,9 +166,8 @@ public class ArrayList<E> implements Iterable<E>{
     }
 
     /**
-     * Ensures that the underlying array has the given capacity; if not,
-     * the size is doubled (or more if given capacity is even larger)
-     * 
+     * Ensures that the underlying array has the given capacity; if not, the size is doubled (or more if given capacity
+     * is even larger)
      * @param capacity the new capacity that we need the list to be
      */
     private void ensureCapacity(int capacity) {
@@ -199,12 +181,9 @@ public class ArrayList<E> implements Iterable<E>{
     }
 
     /**
-     * Checks if the given index is within legal limits - be bigger or 
-     * equal 0 and  smaller than size
-     * 
+     * Checks if the given index is within legal limits - be bigger or equal 0 and  smaller than size
      * @param index the index to check
-     * @throws IndexOutOfBoundsException if the given index is not a legal
-     * index for the current list
+     * @throws IndexOutOfBoundsException if the given index is not a legal index for the current list
      */
     private void checkIndex(int index) {
         if (index < 0 || index >= size) {
@@ -213,41 +192,34 @@ public class ArrayList<E> implements Iterable<E>{
     }
     
     /**
-     * Moves all the null elements to the beginning of the list
-     * conserving the order of the non-null elements at the end of
-     * the list. The new list will only have non-null values and
-     * be of the same capacity
-     * 
-     * @return true if the nulls were compressed successfully
+     * Compresses all non-null elements to the beginning of the list conserving the order of the non-null elements.
+     * The new list will only have non-null values and be of the same capacity.
      */
-    public boolean compressNulls(){
+    public void compressNulls(){
 
-        int elementPointer = size-1;
-        while (elementData[elementPointer] != null){
-            elementPointer--;
+        int elementPointer = 0;
+        while (elementData[elementPointer] != null && elementPointer < this.size){
+            elementPointer++;
+            if (elementPointer >= this.size){
+                return;
+            }
         }
-        if (elementPointer <= 0){
-            size = 0;
-            return true;
-        }
+
         int counter = elementPointer;
         int counterNulls = 1;
-        for (elementPointer--; elementPointer >= 0; elementPointer--){
+        for (elementPointer++; elementPointer <= this.size; elementPointer++){
             if (elementData[elementPointer] != null){
                 elementData[counter] = elementData[elementPointer];
-                counter--;
+                counter++;
             } else {
                 counterNulls++;
             }
         }
-        elementData = Arrays.copyOfRange(elementData, counterNulls, size);
-        size -= counterNulls;
-        return true;
+        this.size = this.size - counterNulls+1;
     }
     
     /**
      * Creates a comma-separated bracketed version of the list
-     * 
      * @return a comma-separated bracketed version of the list
      */
     @Override
@@ -255,12 +227,12 @@ public class ArrayList<E> implements Iterable<E>{
         if (size == 0) {
             return "[]";
         } else {
-            String result = "[" + elementData[0];
+            StringBuilder result = new StringBuilder("[" + elementData[0]);
             for (int i = 1; i < size; i++) {
-                result += ", " + elementData[i];
+                result.append(", ").append(elementData[i]);
             }
-            result += "]";
-            return result;
+            result.append("]");
+            return result.toString();
         }
     }
     
@@ -275,8 +247,7 @@ public class ArrayList<E> implements Iterable<E>{
         private boolean removeOK;      
         
         /**
-         * Constructs an iterator for the given list, sets the removeOK to 
-         * false
+         * Constructs an iterator for the given list, sets the removeOK to false
          */
         public ArrayListIterator() {
             position = 0;
@@ -285,20 +256,15 @@ public class ArrayList<E> implements Iterable<E>{
 
         /**
          * Checks if there is an element next to the current position
-         * 
-         * @return true if there is an element next to the current position,
-         * false otherwise
+         * @return true if there is an element next to the current position, false otherwise
          */
         public boolean hasNext() {
             return position < size();
         }
 
         /**
-         * Gets the element at the current position, updates the position and
-         * sets the removeOK to true
-         * 
-         * @throws NoSuchElementException if there is no more element in the
-         * list
+         * Gets the element at the current position, updates the position and sets the removeOK to true
+         * @throws NoSuchElementException if there is no more element in the list
          * @return the element at the current position
          */
         public E next() {
@@ -312,9 +278,8 @@ public class ArrayList<E> implements Iterable<E>{
         }
 
         /**
-         * Removes the element at the current position, if removeOK is true,
-         * updates the position and sets removeOK to false
-         * 
+         * Removes the element at the current position, if removeOK is true, updates the position and sets removeOK
+         * to false
          * @throws IllegalStateException if removeOK is false
          */
         public void remove() {
