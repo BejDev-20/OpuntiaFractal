@@ -162,7 +162,14 @@ public class GenerateFractal implements Subject{
     public int getRecursionDepth(){
         return recursionDepth;
     }
-    
+
+    /**
+     * Retrieves the child position (degree)
+     * @return the child position (degree)
+     */
+    public double getDegree(){
+        return this.degree;
+    }
     /**
      * Retrieves the radius ratio
      * @return the radius ratio of the child to the parent

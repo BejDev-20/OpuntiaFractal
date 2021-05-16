@@ -152,7 +152,7 @@ public class GUI{
                     }
                 }
         );
-        
+        childPositionSlider.setValue((int)Math.toDegrees(allFractals.getDegree()));
         drawButton.addActionListener( e -> fractals.setData((Integer)(recursionDepthComboBox.getSelectedItem()),
                                 childRadiusSlider.getValue(), childPositionSlider.getValue(),
                                 chooseCactusColor.getBackground() , choosePearColor.getBackground())
