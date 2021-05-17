@@ -57,4 +57,5 @@ Opuntal Fractal drawn
 ## Authors and acknowledgement
 
 Base code for ArrayList by Stuart Reges
+
 Iulia Bejsovec
